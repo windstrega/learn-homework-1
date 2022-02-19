@@ -13,8 +13,15 @@
 
 """
 import logging
+from xmlrpc.client import Marshaller
+
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
+from datetime import datetime
+import ephem
+import logging
+
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
@@ -35,12 +42,16 @@ def greet_user(update, context):
     print(text)
     update.message.reply_text(text)
 
+def planet_info(update, context):
+    planetnameinput = update.message.text.split(' ')
+    if planetnameinput == "Mars":
+        planet = ephem.Mars(datetime.today())
+        update.message.reply_text(ephem.constellation(planet))
 
 def talk_to_me(update, context):
     user_text = update.message.text
     print(user_text)
     update.message.reply_text(text)
-
 
 def main():
     mybot = Updater("КЛЮЧ, КОТОРЫЙ НАМ ВЫДАЛ BotFather", request_kwargs=PROXY, use_context=True)
@@ -48,6 +59,7 @@ def main():
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
+    dp.add_handler(CommandHandler("planet", planet_info))
 
     mybot.start_polling()
     mybot.idle()

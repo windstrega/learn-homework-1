@@ -15,12 +15,22 @@
     
 """
 
-questions_and_answers = {}
 
-def ask_user(answers_dict):
-    """
-    Замените pass на ваш код
-    """
+
+questions_and_answers = {
+    'Как дела?': 'Жесть', 
+    'Что делаешь?': 'Копирую код', 
+    'В чём проблема?': 'Ничего не понимаю', 
+    'Будешь чай?': 'Давай'
+    }
+
+inputisactive = True
+while inputisactive:
+    question = input("Есть вопросы?")
+    if question in questions_and_answers.keys():
+            print(questions_and_answers[question])
+    else:
+          continue
     pass
     
 if __name__ == "__main__":
