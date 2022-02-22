@@ -23,15 +23,14 @@ questions_and_answers = {
     'В чём проблема?': 'Ничего не понимаю', 
     'Будешь чай?': 'Давай'
     }
-
-inputisactive = True
-while inputisactive:
-    question = input("Есть вопросы?")
-    if question in questions_and_answers.keys():
+def ask_user(questions_and_answers):
+    inputisactive = True
+    while inputisactive:
+        question = input("Есть вопросы?")
+        if question in questions_and_answers.keys():
             print(questions_and_answers[question])
-    else:
-          continue
-    pass
+        else:
+            continue
     
 if __name__ == "__main__":
     ask_user(questions_and_answers)
